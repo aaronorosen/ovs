@@ -138,4 +138,7 @@ char *actions_parse_string(const char *s, const struct action_params *,
                            struct ofpbuf *ofpacts, struct expr **prereqsp)
     OVS_WARN_UNUSED_RESULT;
 
+void create_symtab(struct shash *symtab);
+
+
 #endif /* ovn/actions.h */

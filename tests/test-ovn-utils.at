@@ -1,0 +1,13 @@
+AT_BANNER([Test OVN Utils])
+
+m4_define([TEST_OVN_UTILS],
+	[AT_SETUP([test-ovn-utils - $1])
+    AT_SKIP_IF([test $2 = no])
+    AT_KEYWORDS([ovnutils])
+    AT_CHECK([$3 $srcdir/test-ovn-utils.py],
+             [0],[ignore], [ignore])
+    AT_CLEANUP])
+
+
+TEST_OVN_UTILS([Python2], [$HAVE_PYTHON], [$PYTHON])
+TEST_OVN_UTILS([Python3], [$HAVE_PYTHON3], [$PYTHON3])
