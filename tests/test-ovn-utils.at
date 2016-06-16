@@ -1,0 +1,15 @@
+AT_BANNER([Test OVN Utils])
+
+m4_define([TEST_OVN_UTILS],
+	[AT_SETUP([test-ovn-utils - $1])
+    AT_SKIP_IF([test $2 = no])
+    # Skip test if user doesn't have ovs.ovn_utils module
+    AT_SKIP_IF([! $3 -c 'import ovs.ovn_utils' 2> /dev/null])
+    AT_KEYWORDS([ovnutils])
+    AT_CHECK([$3 $srcdir/test-ovn-utils.py],
+             [0],[ignore], [ignore])
+    AT_CLEANUP])
+
+
+TEST_OVN_UTILS([Python2], [$HAVE_PYTHON], [$PYTHON])
+TEST_OVN_UTILS([Python3], [$HAVE_PYTHON3], [$PYTHON3])
