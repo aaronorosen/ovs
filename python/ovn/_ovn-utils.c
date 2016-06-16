@@ -40,6 +40,8 @@
 #include "util.h"
 
 
+void initovn_utils(void);
+
 static void
 create_symtab(struct shash *symtab)
 {

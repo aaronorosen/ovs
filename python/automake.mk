@@ -47,7 +47,9 @@ EXTRA_DIST += \
 	python/setup.py
 
 # C extension support.
-EXTRA_DIST += python/ovs/_json.c
+EXTRA_DIST += \
+	python/ovs/_json.c
+	python/ovn/_ovn_utils.c
 
 PYFILES = $(ovs_pyfiles) python/ovs/dirs.py $(ovstest_pyfiles)
 EXTRA_DIST += $(PYFILES)
