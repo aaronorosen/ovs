@@ -93,7 +93,8 @@ TESTSUITE_AT = \
 	tests/ovn-nbctl.at \
 	tests/ovn-sbctl.at \
 	tests/ovn-controller.at \
-	tests/ovn-controller-vtep.at
+	tests/ovn-controller-vtep.at \
+	tests/test-ovn-utils.at
 
 SYSTEM_KMOD_TESTSUITE_AT = \
 	tests/system-common-macros.at \
@@ -384,6 +385,7 @@ CHECK_PYFILES = \
 	tests/test-jsonrpc.py \
 	tests/test-l7.py \
 	tests/test-ovsdb.py \
+	tests/test-ovn-utils.py \
 	tests/test-reconnect.py \
 	tests/MockXenAPI.py \
 	tests/test-unix-socket.py \

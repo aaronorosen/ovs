@@ -470,5 +470,6 @@ void expr_macros_add(struct shash *macros, const char *name,
                      const char * const *values, size_t n_values);
 void expr_macros_remove(struct shash *macros, const char *name);
 void expr_macros_destroy(struct shash *macros);
+void create_symtab_helper(struct shash *symtab);
 
 #endif /* ovn/expr.h */
