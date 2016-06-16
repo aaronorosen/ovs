@@ -101,7 +101,7 @@ setup_args = dict(
                                                     '../lib/',
                                                     '../ovn/lib',
                                                     '../'],
-                                      sources=["ovs/ovn/ovn-utils.c",
+                                      sources=["ovn/_ovn-utils.c",
                                                '../ovn/lib/lex.c',
                                                '../ovn/lib/actions.c',
                                                '../ovn/lib/expr.c'],
