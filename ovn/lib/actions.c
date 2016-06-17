@@ -26,6 +26,7 @@
 #include "openvswitch/dynamic-string.h"
 #include "openvswitch/ofp-actions.h"
 #include "openvswitch/ofpbuf.h"
+#include "shash.h"
 #include "simap.h"
 
 /* Context maintained during actions_parse(). */

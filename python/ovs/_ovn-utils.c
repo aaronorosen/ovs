@@ -45,7 +45,7 @@ void initovn_utils(void);
 static char parse_match_docs[] =
     "Specify match string to validate\n";
 
-static PyObject* parse_match(PyObject* self, PyObject *args)
+static PyObject* parse_match(PyObject* self OVS_UNUSED, PyObject *args)
 {
     char *string;
 
