@@ -102,10 +102,7 @@ setup_args = dict(
                                                     '../lib/',
                                                     '../ovn/lib',
                                                     '../'],
-                                      sources=["ovs/_ovn-utils.c",
-                                               '../ovn/lib/lex.c',
-                                               '../ovn/lib/actions.c',
-                                               '../ovn/lib/expr.c'],
+                                      sources=["ovs/_ovn-utils.c"],
                                       libraries=['openvswitch'])],
     cmdclass={'build_ext': try_build_ext},
 )
