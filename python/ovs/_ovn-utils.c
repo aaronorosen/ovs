@@ -47,9 +47,10 @@ static char parse_match_docs[] =
 
 static PyObject* parse_match(PyObject* self OVS_UNUSED, PyObject *args)
 {
-    char *string;
+    char *match_string;
+    PyObject *error_string;
 
-    if (!PyArg_ParseTuple(args, "s", &string)) {
+    if (!PyArg_ParseTuple(args, "s", &match_string)) {
 		return Py_BuildValue("s", "Unable to parse input");
     }
 
@@ -57,13 +58,15 @@ static PyObject* parse_match(PyObject* self OVS_UNUSED, PyObject *args)
     create_symtab(&symtab);
     struct expr *expr;
     char *error;
-    expr = expr_parse_string(string, &symtab, &error);
+    expr = expr_parse_string(match_string, &symtab, &error);
 
     expr_destroy(expr);
     expr_symtab_destroy(&symtab);
     shash_destroy(&symtab);
     if(error) {
-		return Py_BuildValue("s", error);
+      error_string = PyString_FromString(error);
+      free(error);
+		return error_string;
     }
     Py_RETURN_NONE;
 }
