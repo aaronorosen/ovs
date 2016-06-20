@@ -21,8 +21,13 @@ class TestOvnUtils(unittest.TestCase):
 
     def test_parse_match_fail(self):
         expected = "Syntax error at `a' expecting field name."
-        returned = ovn_utils.parse_match("a")
-        self.assertEqual(expected, returned)
+        result = ovn_utils.parse_match("a")
+        self.assertEqual(result, expected)
+
+    def test_parse_match_success(self):
+        result = ovn_utils.parse_match(
+            'outport == "25560992-3f36-4a8b-bc19-e3f84188ef33" && ip4 && udp')
+        self.assertEqual(result, None)
 
 if __name__ == '__main__':
     unittest.main()

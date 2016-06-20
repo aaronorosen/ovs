@@ -380,6 +380,7 @@ CHECK_PYFILES = \
 	tests/test-jsonrpc.py \
 	tests/test-l7.py \
 	tests/test-ovsdb.py \
+	tests/test-ovn_utils.py \
 	tests/test-reconnect.py \
 	tests/MockXenAPI.py \
 	tests/test-unix-socket.py \
