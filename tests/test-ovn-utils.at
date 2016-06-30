@@ -1,0 +1,7 @@
+AT_BANNER([Test OVN Utils])
+
+AT_SETUP([test-ovn_utils])
+AT_KEYWORDS([ovnutils])
+AT_SKIP_IF([test $HAVE_PYTHON = no])
+AT_CHECK([python tests/test-ovn_utils.py], [0])
+AT_CLEANUP

@@ -1,6 +1,0 @@
-AT_BANNER([Test OVN Utils])
-
-AT_SETUP([test-ovn_utils])
-AT_KEYWORDS([ovnutils python])
-AT_CHECK([python tests/test-ovn_utils.py])
-AT_CLEANUP

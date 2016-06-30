@@ -93,7 +93,7 @@ TESTSUITE_AT = \
 	tests/ovn-sbctl.at \
 	tests/ovn-controller.at \
 	tests/ovn-controller-vtep.at \
-	tests/test-ovn_utils.at
+	tests/test-ovn-utils.at
 
 SYSTEM_KMOD_TESTSUITE_AT = \
 	tests/system-common-macros.at \
