@@ -20,8 +20,15 @@
 #include "ovn/lib/lex.h"
 #include "shash.h"
 
+#if PY_MAJOR_VERSION >= 3
+#define IS_PY3K
+#endif
 
+#ifdef IS_PY3K
+PyMODINIT_FUNC PyInit_ovn_utils(void);
+#else
 void initovn_utils(void);
+#endif
 
 static char parse_match_docs[] =
     "Specify match string to validate\n";
@@ -45,7 +52,11 @@ static PyObject* parse_match(PyObject* self OVS_UNUSED, PyObject *args)
     expr_symtab_destroy(&symtab);
     shash_destroy(&symtab);
     if(error) {
+#ifdef IS_PY3K
+      error_string = PyUnicode_FromString(error);
+#else
       error_string = PyString_FromString(error);
+#endif
       free(error);
 		return error_string;
     }
@@ -58,8 +69,36 @@ static PyMethodDef ovn_utils_funcs[] = {
     {NULL}
 };
 
-void initovn_utils(void)
+#ifdef IS_PY3K
+static struct PyModuleDef moduledef = {
+    PyModuleDef_HEAD_INIT,
+    "ovs.ovn_utils",            /* m_name */
+    "OVN helper utilities",     /* m_doc */
+    0,                          /* m_size */
+    ovn_utils_funcs,                /* m_methods */
+    0,                          /* m_slots */
+    0,                          /* m_traverse */
+    0,                          /* m_clear */
+    0,                          /* m_free */
+};
+#define INITERROR return NULL
+#else /* !IS_PY3K */
+#define INITERROR return
+#endif
+
+PyMODINIT_FUNC
+#ifdef IS_PY3K
+PyInit_ovn_utils(void)
+#else
+initovn_utils(void)
+#endif
 {
+#ifdef IS_PY3K
+    PyObject *m;
+    m = PyModule_Create(&moduledef);
+    return m;
+#else
     Py_InitModule3("ovs.ovn_utils", ovn_utils_funcs,
                    "OVN helper utilities");
+#endif
 }
