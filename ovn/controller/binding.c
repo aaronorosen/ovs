@@ -17,7 +17,7 @@
 #include "binding.h"
 
 #include "lib/bitmap.h"
-#include "lib/hmap.h"
+#include "openvswitch/hmap.h"
 #include "lib/sset.h"
 #include "lib/util.h"
 #include "lib/vswitch-idl.h"

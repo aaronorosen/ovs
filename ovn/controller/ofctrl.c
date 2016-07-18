@@ -18,7 +18,7 @@
 #include "byte-order.h"
 #include "dirs.h"
 #include "hash.h"
-#include "hmap.h"
+#include "openvswitch/hmap.h"
 #include "ofctrl.h"
 #include "openflow/openflow.h"
 #include "openvswitch/dynamic-string.h"

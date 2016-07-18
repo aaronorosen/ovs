@@ -18,7 +18,7 @@
 #include "patch.h"
 
 #include "hash.h"
-#include "lib/hmap.h"
+#include "openvswitch/hmap.h"
 #include "lib/vswitch-idl.h"
 #include "openvswitch/vlog.h"
 #include "ovn-controller.h"

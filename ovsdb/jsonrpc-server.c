@@ -23,7 +23,7 @@
 #include "column.h"
 #include "openvswitch/dynamic-string.h"
 #include "monitor.h"
-#include "json.h"
+#include "openvswitch/json.h"
 #include "jsonrpc.h"
 #include "ovsdb-error.h"
 #include "ovsdb-parser.h"
@@ -38,6 +38,7 @@
 #include "timeval.h"
 #include "transaction.h"
 #include "trigger.h"
+#include "util.h"
 #include "openvswitch/vlog.h"
 
 VLOG_DEFINE_THIS_MODULE(ovsdb_jsonrpc_server);
