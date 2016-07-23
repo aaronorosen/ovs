@@ -589,3 +589,50 @@ AC_DEFUN([OVS_CHECK_PRAGMA_MESSAGE],
      [AC_DEFINE(HAVE_PRAGMA_MESSAGE,1,[Define if compiler supports #pragma
      message directive])])
   ])
+
+dnl OVS_CHECK_PYTHON_HEADERS
+AC_DEFUN([OVS_CHECK_PYTHON_HEADERS],
+  [AC_REQUIRE([OVS_CHECK_PYTHON])
+    AC_PATH_PROG([PYTHON_CONFIG], python-config, no)
+    if test "$PYTHON_CONFIG" != no; then
+      PYTHON_INCLUDES=`$PYTHON_CONFIG --includes`
+      PYTHON_LIBS=`$PYTHON_CONFIG --libs`
+      PYTHON_LDFLAGS=`$PYTHON_CONFIG --ldflags`
+      save_LIBS="$LIBS"
+      save_CPPFLAGS="$CPPFLAGS"
+      save_LDFLAGS="$LDFLAGS"
+      LIBS="$PYTHON_LIBS"
+      LDFLAGS="$PYTHON_LDFLAGS"
+      CPPFLAGS="$PYTHON_INCLUDES"
+      AC_LINK_IFELSE(
+        [AC_LANG_PROGRAM([#include <Python.h>],[])],
+                         [have_py_headers=true])
+      LIBS="$save_LIBS"
+      CPPFLAGS="$save_CPPFLAGS"
+      LDFLAGS="$save_LDFLAGS"
+    fi
+   AM_CONDITIONAL([HAVE_PYTHON_HEADERS], [test "$have_py_headers" = "true"])])
+  ])
+
+AC_DEFUN([OVS_CHECK_PYTHON3_HEADERS],
+  [AC_REQUIRE([OVS_CHECK_PYTHON3])
+    AC_PATH_PROG([PYTHON3_CONFIG], python3-config, no)
+    if test "$PYTHON3_CONFIG" != no; then
+      PYTHON3_INCLUDES=`$PYTHON3_CONFIG --includes`
+      PYTHON3_LIBS=`$PYTHON3_CONFIG --libs`
+      PYTHON3_LDFLAGS=`$PYTHON3_CONFIG --ldflags`
+      save_LIBS="$LIBS"
+      save_CPPFLAGS="$CPPFLAGS"
+      save_LDFLAGS="$LDFLAGS"
+      LIBS="$PYTHON3_LIBS"
+      LDFLAGS="$PYTHON3_LDFLAGS"
+      CPPFLAGS="$PYTHON3_INCLUDES"
+      AC_LINK_IFELSE(
+        [AC_LANG_PROGRAM([#include <Python.h>],[])],
+                         [have_py3_headers=true])
+      LIBS="$save_LIBS"
+      CPPFLAGS="$save_CPPFLAGS"
+      LDFLAGS="$save_LDFLAGS"
+    fi
+   AM_CONDITIONAL([HAVE_PYTHON3_HEADERS], [test "$have_py3_headers" = "true"])])
+  ])

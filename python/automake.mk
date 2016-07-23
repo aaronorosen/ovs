@@ -79,10 +79,10 @@ ovs-install-data-local:
 	rm python/ovs/dirs.py.tmp
 
 python-sdist: $(srcdir)/python/ovs/version.py $(ovs_pyfiles) python/ovs/dirs.py
-	(cd python/ && $(PYTHON) setup.py sdist)
+	cd $(srcdir)/python/ && $(PYTHON) setup.py sdist
 
 pypi-upload: $(srcdir)/python/ovs/version.py $(ovs_pyfiles) python/ovs/dirs.py
-	(cd python/ && $(PYTHON) setup.py sdist upload)
+	cd $(srcdir)/python/ && $(PYTHON) setup.py sdist upload
 else
 ovs-install-data-local:
 	@:
@@ -112,3 +112,26 @@ $(srcdir)/python/ovs/dirs.py: python/ovs/dirs.py.template
 		< $? > $@.tmp && \
 	mv $@.tmp $@
 EXTRA_DIST += python/ovs/dirs.py.template
+
+.PHONY : clean_python_extensions
+clean_python_extensions:
+	cd $(srcdir)/python/ && rm -f ovs/*.so
+
+SETUPPY_CFLAGS = -I$(abs_top_srcdir)/include -I$(abs_top_builddir)/include
+if HAVE_PYTHON_HEADERS
+$(srcdir)/python/ovs/_json.so: lib/libopenvswitch.la
+	cd $(srcdir)/python/ && CFLAGS="$(SETUPPY_CFLAGS)" $(PYTHON) setup.py build_ext --inplace
+
+ALL_LOCAL += $(srcdir)/python/ovs/_json.so
+endif
+
+if HAVE_PYTHON3_HEADERS
+PY3_EXT_NAME=$(srcdir)/python/ovs/_json$(shell $(PYTHON3) -c \
+			 "from distutils import sysconfig;print(sysconfig.get_config_var('EXT_SUFFIX'))")
+$(PY3_EXT_NAME): lib/libopenvswitch.la
+	cd $(srcdir)/python/ && CFLAGS="$(SETUPPY_CFLAGS)" $(PYTHON3) setup.py build_ext --inplace
+
+ALL_LOCAL += $(PY3_EXT_NAME)
+endif
+
+CLEAN_LOCAL += clean_python_extensions
